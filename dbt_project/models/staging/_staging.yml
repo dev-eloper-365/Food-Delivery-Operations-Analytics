@@ -1,0 +1,68 @@
+version: 2
+
+sources:
+  - name: silver
+    description: "Silver layer tables loaded from Parquet into DuckDB"
+    schema: main
+    tables:
+      - name: orders
+      - name: order_items
+      - name: delivery_events
+      - name: restaurants
+      - name: riders
+      - name: refunds
+      - name: support_tickets
+
+models:
+  - name: stg_orders
+    description: "Staged orders with DQ filtering"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: order_value
+        tests:
+          - not_null
+
+  - name: stg_delivery_events
+    description: "Staged delivery events excluding orphans"
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+  - name: stg_order_items
+    description: "Staged order items"
+
+  - name: stg_restaurants
+    description: "Staged restaurants"
+    columns:
+      - name: restaurant_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_riders
+    description: "Staged riders"
+    columns:
+      - name: rider_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_refunds
+    description: "Staged refunds"
+    columns:
+      - name: refund_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_support_tickets
+    description: "Staged support tickets"
+    columns:
+      - name: ticket_id
+        tests:
+          - unique
+          - not_null

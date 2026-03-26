@@ -1,0 +1,6 @@
+time_slot,start_hour,end_hour,label
+morning,8,11,Morning (8AM-11AM)
+lunch,12,15,Lunch (12PM-3PM)
+evening,16,19,Evening (4PM-7PM)
+dinner,20,23,Dinner (8PM-11PM)
+late_night,0,7,Late Night (12AM-7AM)

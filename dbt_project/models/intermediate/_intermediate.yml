@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: int_order_delivery_timeline
+    description: "Orders joined with delivery event timestamps for timeline analysis"
+
+  - name: int_order_refund_joined
+    description: "Orders joined with refund data and driver categorization"
+
+  - name: int_rider_order_metrics
+    description: "Daily rider-level delivery metrics"
+
+  - name: int_restaurant_prep_times
+    description: "Restaurant-level prep time calculations"

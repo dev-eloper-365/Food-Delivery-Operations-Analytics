@@ -1,0 +1,28 @@
+name: 'food_delivery_analytics'
+version: '1.0.0'
+config-version: 2
+
+profile: 'food_delivery'
+
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  food_delivery_analytics:
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: ephemeral
+    marts:
+      core:
+        +materialized: table
+        +schema: marts
+      analytics:
+        +materialized: table
+        +schema: analytics

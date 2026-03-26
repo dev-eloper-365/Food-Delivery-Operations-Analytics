@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: mart_sla_breach_analysis
+    description: "SLA breach analysis by city and time slot"
+
+  - name: mart_restaurant_prep_delays
+    description: "Restaurant prep time analysis and risk categorization"
+
+  - name: mart_refund_drivers
+    description: "Refund driver analysis with percentages"
+
+  - name: mart_rider_performance
+    description: "Rider performance metrics and rankings"
+
+  - name: mart_weekly_trends
+    description: "Weekly trends for orders, cancellations, and refunds"

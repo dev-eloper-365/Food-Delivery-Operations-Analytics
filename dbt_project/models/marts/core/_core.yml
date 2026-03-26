@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_restaurants
+    description: "Restaurant dimension table"
+    columns:
+      - name: restaurant_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_riders
+    description: "Rider dimension table"
+    columns:
+      - name: rider_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    description: "Date dimension table"
+
+  - name: fct_orders
+    description: "Fact table for orders with delivery timeline"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null

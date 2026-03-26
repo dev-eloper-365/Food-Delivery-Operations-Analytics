@@ -182,7 +182,7 @@ def step5_show_insights():
     try:
         result = con.execute("""
             SELECT city, time_slot, total_orders, breach_rate_pct, overall_breach_rank
-            FROM analytics.mart_sla_breach_analysis
+            FROM main_analytics.mart_sla_breach_analysis
             ORDER BY breach_rate_pct DESC
             LIMIT 5
         """).fetchdf()
@@ -209,7 +209,7 @@ def step5_show_insights():
         result = con.execute("""
             SELECT restaurant_id, city, cuisine_type,
                    total_orders, avg_prep_time_minutes, delay_rate_pct, risk_category
-            FROM analytics.mart_restaurant_prep_delays
+            FROM main_analytics.mart_restaurant_prep_delays
             WHERE risk_category IN ('High Risk', 'Medium Risk')
             ORDER BY delay_rate_pct DESC
             LIMIT 5
@@ -232,7 +232,7 @@ def step5_show_insights():
         result = con.execute("""
             SELECT refund_driver_category, refund_count, refund_count_pct,
                    refund_amount, avg_refund_amount
-            FROM analytics.mart_refund_drivers
+            FROM main_analytics.mart_refund_drivers
             ORDER BY refund_count_pct DESC
         """).fetchdf()
         print(result.to_string(index=False))
@@ -254,7 +254,7 @@ def step5_show_insights():
             SELECT rider_id, city, total_orders_delivered,
                    ROUND(on_time_rate * 100, 1) as on_time_pct,
                    efficiency_score, performance_tier
-            FROM analytics.mart_rider_performance
+            FROM main_analytics.mart_rider_performance
             WHERE performance_tier = 'Star Performer'
             ORDER BY efficiency_score DESC
             LIMIT 5
@@ -278,7 +278,7 @@ def step5_show_insights():
             SELECT week_start::DATE as week, total_orders, completed_orders,
                    cancelled_orders, ROUND(gmv, 0) as gmv,
                    cancellation_rate_pct, gmv_wow_pct
-            FROM analytics.mart_weekly_trends
+            FROM main_analytics.mart_weekly_trends
             ORDER BY week_start DESC
             LIMIT 5
         """).fetchdf()

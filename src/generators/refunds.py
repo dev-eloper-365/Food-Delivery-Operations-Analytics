@@ -22,9 +22,15 @@ class RefundsGenerator(BaseGenerator):
         self.refund_rate = refund_rate
 
     def generate(self) -> pd.DataFrame:
-        eligible = self.orders[self.orders["status"].isin(["delivered", "cancelled"])]
-        n_refunds = int(len(eligible) * self.refund_rate)
-        refund_orders = eligible.sample(n=n_refunds)
+        # Match both lowercase and capitalized status values
+        status_col = self.orders["status"].str.lower()
+        eligible = self.orders[status_col.isin(["delivered", "cancelled"])]
+
+        if len(eligible) == 0:
+            return pd.DataFrame(columns=["refund_id", "order_id", "refund_ts", "refund_reason", "refund_amount"])
+
+        n_refunds = max(1, int(len(eligible) * self.refund_rate))
+        refund_orders = eligible.sample(n=min(n_refunds, len(eligible)))
         refunds = [self._generate_refund(order) for _, order in refund_orders.iterrows()]
         df = pd.DataFrame(refunds)
         df = self.inject_nulls(df, ["refund_reason"])
